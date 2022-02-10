@@ -16,6 +16,10 @@ class GeneratorRegistry:
         existence_required.connect(self.existence_required_receiver)
 
     def register(self, id, generator):
+
+        # Store the ID to the generator for back-referencing
+        generator.id = id
+
         registered_generator = self._generators.get(id)
         if registered_generator and generator != self._generators[id]:
             raise AlreadyRegistered('The generator with id %s is'
